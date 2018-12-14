@@ -1,0 +1,8 @@
+{
+    "table": "YOUR_TABLE_NAME",
+    "host": "jrdevleague.cb9co1xxtizk.us-west-2.rds.amazonaws.com",
+    "database": "YOUR_DATABASE_NAME",
+    "user": "YOUR_USERNAME",
+    "password": "YOUR_PASSWORD",
+    "port": 5432
+  }
