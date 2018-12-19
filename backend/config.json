@@ -1,8 +1,8 @@
 {
-    "table": "YOUR_TABLE_NAME",
+    "table": "movies",
     "host": "jrdevleague.cb9co1xxtizk.us-west-2.rds.amazonaws.com",
-    "database": "YOUR_DATABASE_NAME",
-    "user": "YOUR_USERNAME",
-    "password": "YOUR_PASSWORD",
+    "database": "whs_tim_kunta_kinte_jameson",
+    "user": "jrdevleague",
+    "password": "jrD3vLeague!",
     "port": 5432
   }
