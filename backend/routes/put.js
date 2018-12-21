@@ -21,8 +21,8 @@ const pool = new Pool({ //makes a new Postgres instance
 });
 
 module.exports.putMovie = (event, context, callback) => {
-    let {/*some values*/} = event.body;
-    const putSomeMovie = `UPDATE ${table} SET Somevalue = $1 WHERE Somevalue = $2;`; //commands postgres to get data from table
+    let {id, name, genre, release_date, rating} = event.body;
+    const putSomeMovie = `UPDATE ${movies} SET Somevalue = $1 WHERE Somevalue = $2;`; //commands postgres to get data from table
 
     pool.connect()
     .then(client => {

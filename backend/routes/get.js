@@ -21,7 +21,7 @@ const pool = new Pool({ //makes a new Postgres instance
 });
 
 module.exports.getMovie = (event, context, callback) => {
-    const getAllMovies = `SELECT * FROM ${table}`; //commands postgres to get data from table
+    const getAllMovies = `SELECT * FROM ${movies}`; //commands postgres to get data from table
 
     pool.connect()
     .then(client => {
