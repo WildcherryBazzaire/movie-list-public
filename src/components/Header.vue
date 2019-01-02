@@ -28,7 +28,7 @@ export default {
   display: flex;
   width: 100%;
   height: 8%;
-  background: black;
+  background: #272727;
 }
 ul {
   display: flex;

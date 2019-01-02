@@ -2,14 +2,13 @@
   <div id="movieTab">
       <three-d> </three-d>
       <ul>
-          <li>
-            <p class='movieName'>{{sampleStuff.movie}}</p>
-            <div class='movieImage'>
-              <p>Images will be Updated Soon!!!</p>
+          <li v-for="items in GetItem">
+            <p class='movieName'>{{items.name}}</p>
+            <div class='movieImage'  v-bind:style="{ 'background-image': 'url(' + getImage(items.name) + ')' }">
+              <p class='authorName'>{{items.genre}}</p>
             </div>
-            <p class='authorName'>{{sampleStuff.sumbittedBy}}</p>
-            <p class='rating'>{{sampleStuff.rating}}</p>
-            <p class='description'>{{sampleStuff.description}}</p>
+            <p class='rating'>{{items.rating}}</p>
+            <p class='description'>{{items.release_date.substring(0,10)}}</p>
           </li>
       </ul>
   </div>
@@ -24,10 +23,29 @@ export default {
   },
   data () {
     return {
-        sampleStuff: {movie:'MLP: The Movie',rating:5,description:'ooga booga',sumbittedBy:'James_Games'}
+        sampleStuff: {movie:'MLP: The Movie',rating:5,description:'ooga booga',sumbittedBy:'James_Games'},
+        GetItem: [],
+
+    }
+  },
+  created () {
+    this.$http.get('https://ipezpsmb8i.execute-api.us-west-2.amazonaws.com/dev/get').then(function(data){
+      let tempData = JSON.parse(data.data.body); //parses it to Objects as its just string in an object
+      this.GetItem = tempData.message.rows;
+    });
+  },
+  methods: {
+    getImage: function(movie) {
+      this.$http.get(`https://api.themoviedb.org/3/search/movie?api_key=076e31b5f5be3a58bbd0c13a5cd7b901&language=en-US&query=${movie}&page=1&include_adult=false`).then(function(data){
+        if(data.body.results.length !== 0) {
+          let temp = data.body.results[0].poster_path;
+          return `https://image.tmdb.org/t/p/w500/${temp}`;
+        }
+      });
     }
   }
 }
+//link to get images https://image.tmdb.org/t/p/w500/kqjL17yufvn9OVLyXYpvtyrFfak.jpg
 </script>
 
 <style lang="scss" scoped>
@@ -57,9 +75,19 @@ li {
   );
   width: 25em;
   height: 30rem;
-  margin: 1rem auto;
+  margin: 2rem auto;
   border-radius: 2rem;
   overflow: hidden;
+}
+li > p {
+  text-align: center;
+}
+li:nth-child(odd) {
+  transform: rotate(3deg);
+}
+li:nth-child(even) {
+  transform: rotate(-3deg);
+  background: repeating-linear-gradient(45deg, #63bc60, #63bc60 10px, #3b9022 10px, #3b9022 24px);
 }
 .movieName {
   font-size: 2rem;
@@ -72,26 +100,22 @@ li {
 .movieImage {
   height: 50%;
   position: relative;
-  background-image: url('../assets/download.jpg');
   background-position: center;
   background-size: cover;
 }
 .movieImage > p {
-  position: absolute;
-  margin: 0;
-  padding: 1rem;
-  text-align: center;
-  bottom: 0%;
+    width: 100%;
+    position: absolute;
+    margin: 0;
+    padding: 0.5rem 0;
+    text-align: center;
+    bottom: 0%;
+    background: rgba(0,0,0,0.5);
 }
 .authorName {
   margin: 1rem;
   font-size: 1.4rem;
   text-align: center;
   color: white;
-}
-
-::-webkit-scrollbar {
-    width: 0px;  /* remove scrollbar space */
-    background: transparent;  /* optional: just make scrollbar invisible */
 }
 </style>

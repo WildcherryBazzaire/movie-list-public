@@ -21,13 +21,13 @@ const pool = new Pool({ //makes a new Postgres instance
 });
 
 module.exports.putMovie = (event, context, callback) => {
-    let {id, name, genre, release_date, rating} = event.body;
+    let {oldMovie,newMovie} = event.body;
     const putSomeMovie = `UPDATE ${movies} SET Somevalue = $1 WHERE Somevalue = $2;`; //commands postgres to get data from table
 
     pool.connect()
     .then(client => {
         client.release();
-        return client.query(putSomeMovie);
+        return client.query(putSomeMovie,[oldMovie,newMovie]);
     })
     .then(data => {
         const response = {
@@ -46,3 +46,15 @@ module.exports.putMovie = (event, context, callback) => {
         callback(null, response);
     });
 };
+
+/*
+{
+    "table": "movies",
+    "host": "jrdevleague.cb9co1xxtizk.us-west-2.rds.amazonaws.com",
+    "database": "whs_tim_kunta_kinte_jameson",
+    "user": "jrdevleague",
+    "password": "jrD3vLeague!",
+    "port": 5432
+  }
+  YOU FUCKIN SUCK !!!
+*/
