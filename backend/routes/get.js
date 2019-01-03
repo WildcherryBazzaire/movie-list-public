@@ -40,8 +40,6 @@ module.exports.getMovie = (event, context, callback) => {
             input: event,
           }),
         };
-  
-  
         callback(null, response);
     });
 };

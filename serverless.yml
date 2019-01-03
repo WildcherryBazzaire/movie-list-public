@@ -63,7 +63,7 @@ provider:
 
 functions:
   getMovie:
-    handler: routes/get.getMovie
+    handler: backend/routes/get.getMovie
     events:
       - http: #for http and what it does
           path: get
@@ -72,7 +72,7 @@ functions:
           integration: lambda # does mirecles I guess
 
   putMovie:
-    handler: routes/put.putMovie
+    handler: backend/routes/put.putMovie
     events:
       - http: #for http and what it does
           path: put
@@ -81,7 +81,7 @@ functions:
           integration: lambda # does mirecles I guess
 
   postMovie:
-    handler: routes/post.postMovie
+    handler: backend/routes/post.postMovie
     events:
       - http: #for http and what it does
           path: post
@@ -90,7 +90,7 @@ functions:
           integration: lambda # does mirecles I guess
 
   deleteMovie:
-    handler: routes/delete.deleteMovie
+    handler: backend/routes/delete.deleteMovie
     events:
       - http: #for http and what it does
           path: delete

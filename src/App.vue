@@ -1,6 +1,7 @@
 <template>
   <div id="root">
     <myHeader></myHeader>
+    <movie-tab> </movie-tab>
   </div>
 </template>
 
@@ -11,7 +12,7 @@ export default {
   name: 'root',
   components: {
     'myHeader': Header,
-    'movie-tab': MovieTab
+    'movie-tab': MovieTab,
   },
   data () {
     return {
@@ -33,6 +34,13 @@ html, body, #root {
   width: 100%;
   height: 100%;
   margin: 0;
-  color: rgb(252,252,252);
+  overflow: hidden;
 }
+
+body {
+  background-image: url('./assets/background.png');
+  background-size: 360px 360px;
+}
+
+
 </style>
