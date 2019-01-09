@@ -20,14 +20,14 @@ const pool = new Pool({ //makes a new Postgres instance
     idleTimeoutMillis: 1000
 });
 
-module.exports.postMovie = (event, context, callback) => {
-    let {id, name, genre, release_date, rating} = event.body;
-    const postSomeMovie = `INSERT INTO ${movies} VALUES(some values);`; //commands postgres to get data from table
+module.exports.putMovie = (event, context, callback) => {
+    let {oldMovie,newMovie} = event.body;
+    const putSomeMovie = `UPDATE ${table} SET name = $1 WHERE name = $2;`; //commands postgres to get data from table
 
     pool.connect()
     .then(client => {
         client.release();
-        return client.query(postSomeMovie,[/*some value*/]);
+        return client.query(putSomeMovie,[newMovie,oldMovie]);
     })
     .then(data => {
         const response = {
@@ -41,6 +41,20 @@ module.exports.postMovie = (event, context, callback) => {
             input: event,
           }),
         };
+  
+  
         callback(null, response);
     });
 };
+
+/*
+{
+    "table": "movies",
+    "host": "jrdevleague.cb9co1xxtizk.us-west-2.rds.amazonaws.com",
+    "database": "whs_tim_kunta_kinte_jameson",
+    "user": "jrdevleague",
+    "password": "jrD3vLeague!",
+    "port": 5432
+  }
+  YOU FUCKIN SUCK !!!
+*/

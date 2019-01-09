@@ -20,13 +20,14 @@ const pool = new Pool({ //makes a new Postgres instance
     idleTimeoutMillis: 1000
 });
 
-module.exports.getMovie = (event, context, callback) => {
-    const getAllMovies = `SELECT * FROM ${movies}`; //commands postgres to get data from table
+module.exports.postMovie = (event, context, callback) => {
+    let {name, rating, comment} = event.body;
+    const postSomeMovie = `INSERT INTO ${table} VALUES(DEFAULT,$1,$2,$3);`; //commands postgres to get data from table
 
     pool.connect()
     .then(client => {
         client.release();
-        return client.query(getAllMovies);
+        return client.query(postSomeMovie,[name,rating,comment]);
     })
     .then(data => {
         const response = {
@@ -40,8 +41,6 @@ module.exports.getMovie = (event, context, callback) => {
             input: event,
           }),
         };
-  
-  
         callback(null, response);
     });
 };

@@ -22,7 +22,7 @@ const pool = new Pool({ //makes a new Postgres instance
 
 module.exports.deleteMovie = (event, context, callback) => {
     let {value} = event.body;
-    const deleteSomeMovie = `DELETE FROM ${movies} WHERE name= $1 ;`; //commands postgres to get data from table
+    const deleteSomeMovie = `DELETE FROM ${table} WHERE name= $1 ;`; //commands postgres to get data from table
 
     pool.connect()
     .then(client => {
