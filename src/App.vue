@@ -1,6 +1,7 @@
 <template>
   <div id="root">
     <myHeader></myHeader>
+    <component :is=""> </component>
     <movie-tab> </movie-tab>
   </div>
 </template>
@@ -8,15 +9,17 @@
 <script>
 import Header from './components/Header.vue';
 import MovieTab from './components/MovieTab.vue';
+import SubmitTab from './components/Submit.vue';
 export default {
   name: 'root',
   components: {
     'myHeader': Header,
     'movie-tab': MovieTab,
+    'sumbit-tab': SubmitTab
   },
   data () {
     return {
-      
+      // currentTab: 
     }
   }
 }
