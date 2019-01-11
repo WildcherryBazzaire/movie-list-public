@@ -1,14 +1,13 @@
 <template>
   <div id="movieTab">
-      <three-d> </three-d>
       <ul>
-          <li v-for="items in GetItem">
+          <li v-for="items in GetItem" @click="moreDescript(items.comment)">
             <p class='movieName'>{{items.name}}</p>
             <div class='movieImage'  v-bind:style="{ 'background-image': 'url(' + getImage(items.name) + ')' }">
-              <p class='authorName'>{{items.genre}}</p>
+              <p class='typeGenre'>{{items.genre}}</p>
             </div>
             <p class='rating'>{{items.rating}}</p>
-            <p class='description'>{{items.release_date.substring(0,10)}}</p>
+            <p class='description'>{{items.comment.substring(0,20) + "..."}}</p>
           </li>
       </ul>
   </div>
@@ -18,14 +17,9 @@
 import ThreeD from './3D.vue';
 export default {
   name:'MovieTab',
-  components: {
-    'three-d': ThreeD
-  },
   data () {
     return {
-        sampleStuff: {movie:'MLP: The Movie',rating:5,description:'ooga booga',sumbittedBy:'James_Games'},
         GetItem: [],
-
     }
   },
   created () {
@@ -37,11 +31,15 @@ export default {
   methods: {
     getImage: function(movie) {
       this.$http.get(`https://api.themoviedb.org/3/search/movie?api_key=076e31b5f5be3a58bbd0c13a5cd7b901&language=en-US&query=${movie}&page=1&include_adult=false`).then(function(data){
+        console.log(data);
         if(data.body.results.length !== 0) {
           let temp = data.body.results[0].poster_path;
           return `https://image.tmdb.org/t/p/w500/${temp}`;
         }
       });
+    },
+    moreDescript: function(event) {
+
     }
   }
 }
@@ -50,14 +48,14 @@ export default {
 
 <style lang="scss" scoped>
 #movieTab {
-  height: 92%;
-  width: 100%;
+  height: 100%;
+  width: 50%;
 }
 ul {
   display: inline-block;
   padding: 0;
   margin: 0;
-  width: 50%;
+  width: 100%;
   height: 100%;
   float: right;
   overflow: scroll;

@@ -1,9 +1,8 @@
 <template>
-  <div id="submitContainer">
-    <input type="text" v-model="submit.name" placeholder="Name of Movie" />
-    <input type="number" v-model="submit.rating" placeholder="Rating of Movie" />
-    <input type="text" v-model="submit.comment" placeholder="Additional Comments" />
-    <button @click="PutContent()">Submit</button>
+  <div id="deleteContainer">
+    <input type="text" v-model="submit.oldMovie" placeholder="Name of Old Movie" />
+    <input type="text" v-model="submit.value" placeholder="New Name" />
+    <button @click.once="PutContent()">Submit</button>
   </div>
 </template>
 
@@ -13,29 +12,25 @@ export default {
   data () {
     return {
       submit: {
-        name: '',
-        rating: 0,
-        comment: ''
+        oldMovie:'',
+        newMovie:''
       }
     }
   },
   methods: {
-    PutContent: function() {
-          console.log('posted something');
-          this.$http.post('https://ipezpsmb8i.execute-api.us-west-2.amazonaws.com/dev/post',this.submit);
+      PutContent: function() {
+          this.$http.put('https://ipezpsmb8i.execute-api.us-west-2.amazonaws.com/dev/put',this.submit);
           this.DeliverMessage();
-
-    },
-    DeliverMessage: function() {
-      console.log('something is being done');
+      },
+      DeliverMessage: function() {
       this.$emit('emitMessage','deliver the bomb');
-    }
-  }
+      }
+  },
 }
 </script>
 
 <style lang="scss" scoped>
-#submitContainer {
+#deleteContainer {
   display: flex;
   flex-direction: column;
   width: 50%;
