@@ -1,9 +1,9 @@
 <template>
   <div id="movieTab">
       <ul>
-          <li v-for="items in GetItem" @click="moreDescript(items.comment)">
+          <li v-for="(items,index) in GetItem" @click="moreDescript(items.comment)">
             <p class='movieName'>{{items.name}}</p>
-            <div class='movieImage'  v-bind:style="{ 'background-image': 'url(' + getImage(items.name) + ')' }">
+            <div class='movieImage'  v-bind:style="{ 'background-image': 'url(' + getUrl[index] + ')' }">
               <p class='typeGenre'>{{items.genre}}</p>
             </div>
             <p class='rating'>{{items.rating}}</p>
@@ -20,21 +20,31 @@ export default {
   data () {
     return {
         GetItem: [],
+        getUrl: []
     }
   },
   created () {
     this.$http.get('https://ipezpsmb8i.execute-api.us-west-2.amazonaws.com/dev/get').then(function(data){
       let tempData = JSON.parse(data.data.body); //parses it to Objects as its just string in an object
       this.GetItem = tempData.message.rows;
+      this.GetItem.map( (item) => {
+        console.log("name",item.name);
+        console.log(this.getImage(item.name));
+      });
+      console.log(data);
     });
   },
+ 
   methods: {
     getImage: function(movie) {
       this.$http.get(`https://api.themoviedb.org/3/search/movie?api_key=076e31b5f5be3a58bbd0c13a5cd7b901&language=en-US&query=${movie}&page=1&include_adult=false`).then(function(data){
-        console.log(data);
-        if(data.body.results.length !== 0) {
+        if(data.body.results.length){
           let temp = data.body.results[0].poster_path;
-          return `https://image.tmdb.org/t/p/w500/${temp}`;
+          let url = `https://image.tmdb.org/t/p/w500${temp}`;
+          this.getUrl.push(url);
+          console.log('url', this.getUrl);
+        } else {
+          this.getUrl.push(null);
         }
       });
     },
