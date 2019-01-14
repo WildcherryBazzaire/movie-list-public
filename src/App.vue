@@ -1,8 +1,8 @@
 <template>
-  <div id="root">
+  <div id="root"> <!-- Literal Template -->
     <message-tab v-if="requested"> </message-tab>
-    <myHeader v-on:emittedEvent="changePart($event)"></myHeader>
-    <div id="movingParts">
+    <myHeader v-on:emittedEvent="changePart($event)"></myHeader> <!--Header is put here in-->
+    <div id="movingParts"> <!-- where things are dynamically put-->
       <three-scene> </three-scene>
       <keep-alive>
         <component :is="currentTab" v-on:emitMessage="Requested"> </component>

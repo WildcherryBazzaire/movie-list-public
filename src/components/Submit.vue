@@ -1,7 +1,10 @@
 <template>
   <div id="submitContainer">
     <input type="text" v-model="submit.name" placeholder="Name of Movie" />
-    <input type="number" v-model="submit.rating" placeholder="Rating of Movie" />
+    <select v-model="submit.rating">
+      <option value="" selected="selected" disabled>rating</option>
+      <option type="number" v-for="index in 10" :value="index">{{index}}</option>
+    </select>
     <input type="text" v-model="submit.comment" placeholder="Additional Comments" />
     <button @click="PutContent()">Submit</button>
   </div>
@@ -36,9 +39,10 @@ export default {
 
 <style lang="scss" scoped>
 #submitContainer {
-  display: flex;
-  flex-direction: column;
-  width: 50%;
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    justify-content: space-evenly;
 }
 
 input {
@@ -51,6 +55,17 @@ input {
   margin: 1rem auto;
   color: white;
   border-radius: 5rem;
+}
+select {
+  width: 75%;
+  margin: 0 auto;
+  height: 2.9rem;
+  background: transparent;
+  border: 3px solid white;
+  border-radius: 3rem;
+  color: white;
+  font-size: 2rem;
+  padding: 0 0.5rem;
 }
 button {
       width: 25%;
