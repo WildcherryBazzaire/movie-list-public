@@ -2,7 +2,7 @@
   <div id="myHeader">
     <ul>
       <li v-for="items in content">
-        <h3 class="contents">{{items.name}}</h3>
+        <h3 class="contents" @click="changeComponent(items.call)">{{items.name}}</h3>
       </li>
     </ul>
   </div>
@@ -14,10 +14,17 @@ export default {
   data () {
     return {
       content: [
-          {name:"Submit a Movie"},
-          {name:"Delete a Movie"},
-          {name:"Edit a Existing Movie"}
+          {name:"View Movies",call: "movie-tab"},
+          {name:"Submit a Movie",call: "sumbit-tab"},
+          {name:"Delete a Movie",call: "delete-tab"},
+          {name:"Edit a Existing Movie",call:"put-tab"}
       ]
+    }
+  },
+  methods: {
+    changeComponent: function(event) {
+      console.log("doing something");
+      this.$emit('emittedEvent',event);
     }
   }
 }
@@ -29,6 +36,9 @@ export default {
   width: 100%;
   height: 8%;
   background: #272727;
+}
+h3:hover {
+  cursor:pointer;
 }
 ul {
   display: flex;

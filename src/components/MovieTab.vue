@@ -1,47 +1,66 @@
 <template>
   <div id="movieTab">
-      <three-d> </three-d>
       <ul>
-          <li v-for="items in GetItem">
+          <li v-for="(items,index) in GetItem" @click="moreDescript(items.comment)">
             <p class='movieName'>{{items.name}}</p>
-            <div class='movieImage'  v-bind:style="{ 'background-image': 'url(' + getImage(items.name) + ')' }">
-              <p class='authorName'>{{items.genre}}</p>
+            <div class='movieImage'  v-bind:style="{ 'background-image': 'url(' + getUrl[index] + ')' }">
+              <rating-score :rating="items.rating"></rating-score> <!-- rating score component -->
             </div>
-            <p class='rating'>{{items.rating}}</p>
-            <p class='description'>{{items.release_date.substring(0,10)}}</p>
+            <p>{{getDate[index]}}</p>
+            <p class='description'>{{items.comment.substring(0,20) + "..."}}</p> <!-- substring so strings arent that lo...-->
           </li>
       </ul>
   </div>
 </template>
 
 <script>
-import ThreeD from './3D.vue';
+import Rating from './rating.vue';
 export default {
   name:'MovieTab',
   components: {
-    'three-d': ThreeD
+    'rating-score': Rating
   },
   data () {
     return {
-        sampleStuff: {movie:'MLP: The Movie',rating:5,description:'ooga booga',sumbittedBy:'James_Games'},
-        GetItem: [],
-
+        GetItem: [], //Gets items from the Postgres Database
+        getUrl: [], //Gets the url for the posters from the movie API and stores them in here
+        getDate: [] //gets the dates as well with the images
     }
   },
   created () {
     this.$http.get('https://ipezpsmb8i.execute-api.us-west-2.amazonaws.com/dev/get').then(function(data){
       let tempData = JSON.parse(data.data.body); //parses it to Objects as its just string in an object
       this.GetItem = tempData.message.rows;
+      // this.GetItem.map( (item) => {
+      //   this.getSrc(item.name);
+      // });
+      this.GetItem.forEach(element => {
+        this.getSrc(element.name);
+      });
+      console.log(this.GetItem);
+      console.log(this.getUrl);
     });
   },
+ 
   methods: {
-    getImage: function(movie) {
+    getSrc: function(movie) {
       this.$http.get(`https://api.themoviedb.org/3/search/movie?api_key=076e31b5f5be3a58bbd0c13a5cd7b901&language=en-US&query=${movie}&page=1&include_adult=false`).then(function(data){
-        if(data.body.results.length !== 0) {
-          let temp = data.body.results[0].poster_path;
-          return `https://image.tmdb.org/t/p/w500/${temp}`;
+        if(data.body.results.length !== 0){
+          console.log(data.body.results);
+          let tempPoster = data.body.results[0].poster_path;
+          let url = `https://image.tmdb.org/t/p/w500${tempPoster}`;
+          let tempDate = data.body.results[0].release_date;
+
+          this.getUrl.push(url);
+          this.getDate.push(tempDate);
+        } else {
+          this.getUrl.push('./src/assets/images/missing.jpg');
+          this.getDate.push('????-??-??')
         }
       });
+    },
+    moreDescript: function(event) {
+
     }
   }
 }
@@ -50,14 +69,14 @@ export default {
 
 <style lang="scss" scoped>
 #movieTab {
-  height: 92%;
-  width: 100%;
+  height: 100%;
+  width: 50%;
 }
 ul {
   display: inline-block;
   padding: 0;
   margin: 0;
-  width: 50%;
+  width: 100%;
   height: 100%;
   float: right;
   overflow: scroll;
@@ -78,9 +97,11 @@ li {
   margin: 2rem auto;
   border-radius: 2rem;
   overflow: hidden;
+  transition: all 1s ease;
 }
 li > p {
   text-align: center;
+  font-size: 1.5rem;
 }
 li:nth-child(odd) {
   transform: rotate(3deg);
@@ -88,6 +109,9 @@ li:nth-child(odd) {
 li:nth-child(even) {
   transform: rotate(-3deg);
   background: repeating-linear-gradient(45deg, #63bc60, #63bc60 10px, #3b9022 10px, #3b9022 24px);
+}
+li:hover {
+  box-shadow: 2px 8px 45px rgba(71, 71, 71, 0.493);
 }
 .movieName {
   font-size: 2rem;

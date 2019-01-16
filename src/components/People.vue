@@ -11,11 +11,6 @@ export default {
   name: 'the-team',
   data () {
     return {
-      theTeam: [
-          {name:'Alex',emitted:'K'},
-          {name:'Jame',emitted:'A'},
-          {name:'Timo',emitted:'Y'},
-      ]
     }
   }
 }
