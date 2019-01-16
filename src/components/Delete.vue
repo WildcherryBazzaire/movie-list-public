@@ -1,7 +1,7 @@
 <template>
   <div id="deleteContainer">
-    <input type="text" v-model="submit.value" placeholder="name of movie" />
-    <button v-if="submit.value !== ''" @click.once="deleteContent()">Submit</button>
+    <input type="text" v-model="submit.body.value" placeholder="name of movie" />
+    <button v-if="submit.body.value !== ''" @click.once="deleteContent()">Submit</button>
   </div>
 </template>
 
@@ -11,7 +11,7 @@ export default {
   data () {
     return {
       submit: {
-        value: ''
+        body: {value: ''}
       }
     }
   },
