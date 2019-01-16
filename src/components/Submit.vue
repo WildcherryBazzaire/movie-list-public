@@ -6,7 +6,7 @@
       <option type="number" v-for="index in 10" :value="index">{{index}}</option>
     </select>
     <input type="text" v-model="submit.comment" placeholder="Additional Comments" />
-    <button v-if="submit.name !== '' && submit.rating !== 0 && submit.comment !== ''" @click="PutContent()">Submit</button>
+    <button v-if="submit.name !== '' && submit.rating !== 0 && submit.comment !== ''" @click.once="PutContent()">Submit</button>
   </div>
 </template>
 

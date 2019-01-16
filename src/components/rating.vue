@@ -1,9 +1,11 @@
 <template>
   <div id="rating-container">
-      <span class="squid-stars" v-for="index in 10"> <!-- checks rating and gives the squids -->
-          <img v-if="index > rating" src="../assets/images/rating_squid_trans.png" alt="">
-          <img v-else src="../assets/images/rating_squid_filled.png" alt="">
-      </span>
+      <div id="squids">
+          <span class="squid-stars" v-for="index in 10"> <!-- checks rating and gives the squids -->
+            <img v-if="index > rating" src="../assets/images/rating_squid_trans.png" alt="">
+            <img v-else src="../assets/images/rating_squid_filled.png" alt="">
+        </span>
+      </div>
   </div>
 </template>
 
@@ -28,6 +30,11 @@ export default {
     bottom: 0%;
     padding: 0.2rem;
     justify-content: space-evenly;
+}
+#squids {
+    margin: 0 auto;
+    width: fit-content;
+    height: 100%;
 }
 .squid-stars {
     height: auto;

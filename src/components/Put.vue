@@ -1,7 +1,7 @@
 <template>
   <div id="deleteContainer">
     <input type="text" v-model="submit.oldMovie" placeholder="Name of Old Movie" />
-    <input type="text" v-model="submit.value" placeholder="New Name" />
+    <input type="text" v-model="submit.newMovie" placeholder="New Name" />
     <button v-if="submit.oldMovie !=='' && submit.newMovie !== ''" @click.once="PutContent()">Submit</button>
   </div>
 </template>
