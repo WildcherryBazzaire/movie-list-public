@@ -21,13 +21,13 @@ const pool = new Pool({ //makes a new Postgres instance
 });
 
 module.exports.postMovie = (event, context, callback) => {
-    let {name, genre, release_date, rating} = event.body;
-    const postSomeMovie = `INSERT INTO ${table} VALUES(DEFAULT,$1,$2,$3,$4);`; //commands postgres to get data from table
+    let {name, rating, comment} = event.body;
+    const postSomeMovie = `INSERT INTO ${table} VALUES(DEFAULT,$1,$2,$3);`; //commands postgres to get data from table
 
     pool.connect()
     .then(client => {
         client.release();
-        return client.query(postSomeMovie,[name,genre,release_date,rating]);
+        return client.query(postSomeMovie,[name,rating,comment]);
     })
     .then(data => {
         const response = {
