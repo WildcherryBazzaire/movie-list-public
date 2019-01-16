@@ -1,7 +1,7 @@
 <template>
   <div id="deleteContainer">
     <input type="text" v-model="submit.value" placeholder="name of movie" />
-    <button @click.once="deleteContent()">Submit</button>
+    <button v-if="submit.value !== ''" @click.once="deleteContent()">Submit</button>
   </div>
 </template>
 
@@ -17,7 +17,7 @@ export default {
   },
   methods: {
       deleteContent: function() {
-        this.$http.delete('https://ipezpsmb8i.execute-api.us-west-2.amazonaws.com/dev/post',this.submit);
+        this.$http.delete('https://ipezpsmb8i.execute-api.us-west-2.amazonaws.com/dev/delete',this.submit);
         this.DeliverMessage();
       },
       DeliverMessage: function() {

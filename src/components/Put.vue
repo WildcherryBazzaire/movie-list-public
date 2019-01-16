@@ -2,7 +2,7 @@
   <div id="deleteContainer">
     <input type="text" v-model="submit.oldMovie" placeholder="Name of Old Movie" />
     <input type="text" v-model="submit.value" placeholder="New Name" />
-    <button @click.once="PutContent()">Submit</button>
+    <button v-if="submit.oldMovie !=='' && submit.newMovie !== ''" @click.once="PutContent()">Submit</button>
   </div>
 </template>
 
