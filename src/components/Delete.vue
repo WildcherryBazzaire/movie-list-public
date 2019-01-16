@@ -21,6 +21,7 @@ export default {
         this.DeliverMessage();
       },
       DeliverMessage: function() {
+        this.$toasted.show('level hundred boss');
         this.$emit('emitMessage','deliver the bomb');
       }
   }

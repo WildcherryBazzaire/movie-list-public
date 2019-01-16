@@ -2,6 +2,9 @@ import Vue from 'vue';
 import App from './App.vue';
 import VueResource from 'vue-resource'
 import * as VueGL from "vue-gl";
+import Toasted from 'vue-toasted';
+ 
+Vue.use(Toasted);
 
 Vue.use(VueResource);
 
