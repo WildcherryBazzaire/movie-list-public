@@ -1,8 +1,0 @@
-{
-    "table": "movies",
-    "host": "jrdevleague.cb9co1xxtizk.us-west-2.rds.amazonaws.com",
-    "database": "whs_alex",
-    "user": "agent_8",
-    "password": "woomy",
-    "port": 5432
-  }
