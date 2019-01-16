@@ -33,7 +33,7 @@ export default {
 #deleteContainer {
   display: flex;
   flex-direction: column;
-  width: 50%;
+  width: 100%;
 }
 
 input {

@@ -70,7 +70,7 @@ export default {
 <style lang="scss" scoped>
 #movieTab {
   height: 100%;
-  width: 50%;
+  width: 100%;
 }
 ul {
   display: inline-block;
@@ -79,11 +79,15 @@ ul {
   width: 100%;
   height: 100%;
   float: right;
-  overflow: scroll;
-  overflow-x: hidden;
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
 }
 
 li {
+  
   list-style-type: none;
   background: repeating-linear-gradient(
     45deg,
@@ -102,6 +106,8 @@ li {
 li > p {
   text-align: center;
   font-size: 1.5rem;
+ 
+
 }
 li:nth-child(odd) {
   transform: rotate(3deg);

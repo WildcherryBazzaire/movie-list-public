@@ -41,14 +41,14 @@ export default {
 #submitContainer {
     display: flex;
     flex-direction: column;
-    width: 50%;
+    width: 100%;
     justify-content: space-evenly;
 }
 
 input {
   background: transparent;
   border: 5px solid white;
-  width: 75%;
+  width: 50%;
   height: 2rem;
   padding: 0.5rem;
   font-size: 1.5rem;
@@ -57,7 +57,7 @@ input {
   border-radius: 5rem;
 }
 select {
-  width: 75%;
+  width: 50%;
   margin: 0 auto;
   height: 2.9rem;
   background: transparent;
@@ -66,6 +66,7 @@ select {
   color: white;
   font-size: 2rem;
   padding: 0 0.5rem;
+  color: black;
 }
 button {
       width: 25%;
