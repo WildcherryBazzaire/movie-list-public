@@ -72,5 +72,7 @@ body {
   display: flex;
   height: 92%;
   width: 100%;
+ 
+  
 }
 </style>

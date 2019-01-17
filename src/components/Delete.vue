@@ -32,13 +32,13 @@ export default {
 #deleteContainer {
   display: flex;
   flex-direction: column;
-  width: 50%;
+  width: 100%;
 }
 
 input {
   background: transparent;
   border: 5px solid white;
-  width: 75%;
+  width: 50%;
   height: 2rem;
   padding: 0.5rem;
   font-size: 1.5rem;
