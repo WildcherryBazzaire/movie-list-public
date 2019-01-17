@@ -7,7 +7,7 @@
               <rating-score :rating="items.rating"></rating-score> <!-- rating score component -->
             </div>
             <p>{{getDate[index]}}</p>
-            <p class='description'>{{items.comment.substring(0,20) + "..."}}</p> <!-- substring so strings arent that lo...-->
+            <p class='description'>{{items.comment.substring(0,30) + "..."}}</p> <!-- substring so strings arent that lo...-->
           </li>
       </ul>
   </div>

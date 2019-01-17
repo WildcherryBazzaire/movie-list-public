@@ -7,6 +7,7 @@
     </select>
     <input type="text" v-model="submit.comment" placeholder="Additional Comments" />
     <button v-if="submit.name !== '' && submit.rating !== 0 && submit.comment !== ''" @click.once="PutContent()">Submit</button>
+    <button @click.once="testing()">Testing Toast</button>
   </div>
 </template>
 
@@ -30,9 +31,9 @@ export default {
 
     },
     DeliverMessage: function() {
-      console.log('something is being done');
+      this.$toasted.show('level hundred boss');
       this.$emit('emitMessage','deliver the bomb');
-    }
+    },
   }
 }
 </script>

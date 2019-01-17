@@ -23,7 +23,8 @@ export default {
           this.DeliverMessage();
       },
       DeliverMessage: function() {
-      this.$emit('emitMessage','deliver the bomb');
+        this.$toasted.show('level hundred boss');
+        this.$emit('emitMessage','deliver the bomb');
       }
   },
 }
